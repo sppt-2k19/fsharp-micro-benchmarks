@@ -1,4 +1,4 @@
-﻿module main
+﻿module Main
 
 open System
 open NoMutateBenchmarks
@@ -51,4 +51,5 @@ let main argv =
     result <- result + benchmark "DotProductVector2D" iterations maxTime dotProductVector2D
     result <- result + benchmark "DotProductVector2D" iterations maxTime dotProductVector3D
     
+    printfn "\n%f" result
     0 // return an integer exit code
