@@ -25,13 +25,15 @@ let multiplyVector3D i =
     
 let translateVector2D i =
     let v1 = new Vector2(1.0f);
-    let v2 = new Vector2(v1.X + float32 i)
-    v2.Length()
+    let v2 = new Vector2(float32 i)
+    let v3 = v1 + v2
+    v3.Length()
     
 let translateVector3D i =
     let v1 = new Vector3(1.0f);
-    let v2 = new Vector3(v1.X + float32 i)
-    v1.Length()
+    let v2 = new Vector3(float32 i)
+    let v3 = v1 + v2
+    v3.Length()
     
 let subtractVector2D i =
     let v1 = new Vector2(float32 i)
