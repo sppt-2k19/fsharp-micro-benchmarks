@@ -1,7 +1,7 @@
 ﻿module Main
 
 open System
-open NoMutateBenchmarks
+open MutateBenchmarks
 
     
 let benchmark msg iterations minTime func =
@@ -16,9 +16,9 @@ let benchmark msg iterations minTime func =
         count <- count * 2
         deltaTime <- 0.0f
         deltaTimeSquared <- 0.0f
-        for j = 0 to iterations do
+        for j in 0 .. iterations do
             let timer = System.Diagnostics.Stopwatch.StartNew()
-            for i = 0 to count do
+            for i in 0 .. count do
                 dummy <- dummy + func i
             runningTime <- float32 timer.ElapsedTicks * 100.0f
             let time = runningTime / (float32 count)
@@ -49,7 +49,7 @@ let main argv =
     result <- result + benchmark "LengthVector2D" iterations maxTime lengthVector2D
     result <- result + benchmark "LengthVector3D" iterations maxTime lengthVector3D
     result <- result + benchmark "DotProductVector2D" iterations maxTime dotProductVector2D
-    result <- result + benchmark "DotProductVector2D" iterations maxTime dotProductVector3D
+    result <- result + benchmark "DotProductVector3D" iterations maxTime dotProductVector3D
     
     printfn "\n%f" result
     0 // return an integer exit code

@@ -61,6 +61,6 @@ let dotProductVector2D i =
     Vector2.Dot(v1, v2)
     
 let dotProductVector3D i =
-    let v1 = new Vector2(1.0f)
-    let v2 = new Vector2(float32 i)
-    Vector2.Dot(v1, v2)
+    let v1 = new Vector3(1.0f)
+    let v2 = new Vector3(float32 i)
+    Vector3.Dot(v1, v2)
