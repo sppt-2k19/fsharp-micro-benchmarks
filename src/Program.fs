@@ -1,6 +1,6 @@
 ﻿module Main
     open System
-    open MutateBenchmarks
+    open NoMutateBenchmarks
     
 
     let iterativeBenchmark msg func iterations minTime =

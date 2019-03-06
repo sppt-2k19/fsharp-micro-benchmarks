@@ -15,7 +15,7 @@ let multiplyVector2D i =
     let v1 = new Vector2(1.0f)
     let v2 = new Vector2(float32 i)
     let v3 = v1 * v2
-    v2.Length()
+    v3.Length()
     
 let multiplyVector3D i =
     let v1 = new Vector3(1.0f)
