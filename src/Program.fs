@@ -1,7 +1,6 @@
 ﻿module Main
     open NoMutateBenchmarks
     open NumericalBenchmarks
-    open GameOfLife
     
 
     open System
