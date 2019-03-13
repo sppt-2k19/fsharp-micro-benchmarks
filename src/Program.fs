@@ -1,7 +1,9 @@
 ﻿module Main
+    open System.IO
+    
     open NoMutateBenchmarks
     open NumericalBenchmarks
-    
+    open GameOfLife
 
     open System
     let iterativeBenchmark msg func iterations minTime =
@@ -60,14 +62,10 @@
         
         let (<<) l r = results <- results @ [ r ]
         
-        
         printfn "Iterative Mark8 benchmark"
-        results << runBenchmark iterativeBenchmark "FibonacciRec" fibRecWrap
-        results << runBenchmark iterativeBenchmark "FibonacciRec" fibRecWrap
-        results << runBenchmark iterativeBenchmark "FibonacciRec" fibRecWrap
-        results << runBenchmark iterativeBenchmark "FibonacciIter" fibIterWrap
-        results << runBenchmark iterativeBenchmark "FibonacciIter" fibIterWrap
-        results << runBenchmark iterativeBenchmark "FibonacciIter" fibIterWrap
+        results << runBenchmark iterativeBenchmark "GameOfLife" (iterateGameOfLifeTimes 10)
+        results << runBenchmark iterativeBenchmark "FibonacciRec" (fibRecWrap 150)
+        results << runBenchmark iterativeBenchmark "FibonacciIter" (fibIterWrap 150)
         
         results << runBenchmark iterativeBenchmark "ScaleVector2D" scaleVector2D
         results << runBenchmark iterativeBenchmark "ScaleVector3D" scaleVector3D 
@@ -96,7 +94,10 @@
 //        results << runBenchmark startRecursiveBench "DotProductVector2D" dotProductVector2D
 //        results << runBenchmark startRecursiveBench "DotProductVector3D" dotProductVector3D
         
+        let toString (resultTuple:(string * float * float * int)):string =
+            let (name, mean, dev, count) = resultTuple
+            sprintf "%s,%.3f,%.3f,%i" name mean dev count
         
-        
-        printfn "\n%O" results
+        let resultString = "Test,Mean,Dev,Count\n" + String.Join('\n', (List.map toString results))
+        File.WriteAllText("results.csv", resultString)
         0 // return an integer exit code
