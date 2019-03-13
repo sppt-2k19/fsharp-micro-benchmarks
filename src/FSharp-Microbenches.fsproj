@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="GameOfLife.fs" />
         <Compile Include="MutateBenchmarks.fs" />
         <Compile Include="NoMutateBenchmarks.fs" />
         <Compile Include="NumericalBenchmarks.fs" />
