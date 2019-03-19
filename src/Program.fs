@@ -40,7 +40,7 @@
             let (name, mean, dev, count) = resultTuple
             sprintf "%s,%.3f,%.3f,%i" name mean dev count
         
-        printfn "Iterative Mark8 benchmark - mutate"        
+        printfn "Iterative Mark8 benchmark - no mutate"        
         results << runBenchmark iterativeBenchmark "ScaleVector2D" NoMutateBenchmarks.scaleVector2D
         results << runBenchmark iterativeBenchmark "ScaleVector3D" NoMutateBenchmarks.scaleVector3D 
         results << runBenchmark iterativeBenchmark "MultiplyVector2D" NoMutateBenchmarks.multiplyVector2D
@@ -57,7 +57,7 @@
         File.WriteAllText("no-mutate-results.csv", "Test,Mean,Deviation,Count\n" + String.Join('\n', (List.map toString results)))
         results <- []
         
-        printfn "Iterative Mark8 benchmark - no mutate"
+        printfn "Iterative Mark8 benchmark - mutate"
         results << runBenchmark iterativeBenchmark "Sestoft Multyply" multiply
         results << runBenchmark iterativeBenchmark "Primes" (primes 100)
         results << runBenchmark iterativeBenchmark "ArrayRandomFill" (genRandomNumbers 4 4)
