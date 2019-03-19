@@ -3,9 +3,9 @@ module GameOfLife
 open System
 
 let defaultGameOfLifeGrid = "
-0100000
-0001100
-0001010
+10000
+00110
+00101
 "
 
 let iterateGameOfLife (grid:string) =

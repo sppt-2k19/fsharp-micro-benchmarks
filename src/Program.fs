@@ -26,7 +26,7 @@
                 deltaTimeSquared <- deltaTimeSquared + time * time
         let mean = deltaTime / float iterations
         let standardDeviation = sqrt (abs (deltaTimeSquared - mean * mean * float iterations) / float (iterations - 1))
-        printfn "%s,%.3f,%.3f,%i" msg mean standardDeviation count
+        printfn "%20s,%20.3f,%20.3f,%20i" msg mean standardDeviation count
         msg, mean, standardDeviation, count
     
 //    let runIterations func iterations count =
@@ -63,7 +63,9 @@
         let (<<) l r = results <- results @ [ r ]
         
         printfn "Iterative Mark8 benchmark"
-        results << runBenchmark iterativeBenchmark "GameOfLife" (iterateGameOfLifeTimes 10)
+        results << runBenchmark iterativeBenchmark "Primes" (primes 100)
+        results << runBenchmark iterativeBenchmark "ArrayRandomFill" (genRandomNumbers 4 4)
+        results << runBenchmark iterativeBenchmark "GameOfLife" (iterateGameOfLifeTimes 6)
         results << runBenchmark iterativeBenchmark "FibonacciRec" (fibRecWrap 150)
         results << runBenchmark iterativeBenchmark "FibonacciIter" (fibIterWrap 150)
         
@@ -98,6 +100,6 @@
             let (name, mean, dev, count) = resultTuple
             sprintf "%s,%.3f,%.3f,%i" name mean dev count
         
-        let resultString = "Test,Mean,Dev,Count\n" + String.Join('\n', (List.map toString results))
+        let resultString = "Test,Mean,Deviation,Count\n" + String.Join('\n', (List.map toString results))
         File.WriteAllText("results.csv", resultString)
         0 // return an integer exit code
