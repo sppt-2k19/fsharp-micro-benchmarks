@@ -13,18 +13,16 @@ module NumericalBenchmarks
             | _ -> fibonacciRec next (current + next) (n - 1)
         float32 (fibonacciRec 0 1 no)
         
-    let fibIterWrap no dummy =
-        let fibonacciIterative n =
-            let mutable a = 0
-            let mutable b = 1
-            let mutable c = 0
-            
-            for j in 2 .. n do
-                c <- a + b
-                a <- b
-                b <- c
-            c
-        float32 (fibonacciIterative no)
+    let fibIterWrap n dummy =
+        let mutable a = 0
+        let mutable b = 1
+        let mutable c = 0
+        
+        for j in 2 .. n do
+            c <- a + b
+            a <- b
+            b <- c
+        float32 c
                 
     let primes max dummy = 
         let array = new BitArray(max, true);

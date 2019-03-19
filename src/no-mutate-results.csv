@@ -1,0 +1,13 @@
+Test,Mean,Deviation,Count
+ScaleVector2D,8.653,3.948,67108864
+ScaleVector3D,5.932,2.706,67108864
+MultiplyVector2D,6.578,3.002,67108864
+MultiplyVector3D,5.401,2.464,67108864
+TranslateVector2D,6.531,2.980,67108864
+TranslateVector3D,5.444,2.484,67108864
+SubtractVector2D,6.811,3.108,67108864
+SubtractVector3D,5.379,2.455,67108864
+LengthVector2D,4.960,2.263,67108864
+LengthVector3D,3.742,1.707,134217728
+DotProductVector2D,4.187,1.911,134217728
+DotProductVector3D,3.722,1.698,134217728
