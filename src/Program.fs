@@ -1,7 +1,5 @@
 ﻿module Main
     open System.IO
-    
-    open NoMutateBenchmarks
     open NumericalBenchmarks
     open GameOfLife
 
@@ -29,77 +27,57 @@
         printfn "%20s,%20.3f,%20.3f,%20i" msg mean standardDeviation count
         msg, mean, standardDeviation, count
     
-//    let runIterations func iterations count =
-//        let reducer acc elem =
-//            let started = DateTime.UtcNow
-//            for i in 0 .. count do
-//                    func i |> ignore
-//            let runningTime = DateTime.UtcNow.Subtract(started).TotalMilliseconds * 1000000.0
-//            let time = runningTime / float count
-//            let deltaTime, deltaTimeSquared, _ = acc
-//            deltaTime + time, deltaTimeSquared + (time * time), runningTime
-//        List.fold reducer (0.0, 0.0, 0.0) [0 .. iterations]
-//    let rec recursiveBenchmark msg func iterations minTime count =
-//        let deltaTime, deltaTimeSquared, runningTime = runIterations func iterations count
-//        
-//        if runningTime < minTime && count < Int32.MaxValue / 2 then
-//            recursiveBenchmark msg func iterations minTime count * 2
-//        else 
-//            let mean = deltaTime / float iterations
-//            let standardDeviation = sqrt (abs (deltaTimeSquared - mean * mean * float iterations) / float (iterations - 1))
-//            printfn "%s,%f,%f,%i" msg mean standardDeviation count
-//            msg, mean, standardDeviation, count
-                
     
     [<EntryPoint>]
     let main argv =
         let iterations = 5
         let minTime = float (250 * 1000000)
         let mutable results = []
-        
-//        let startRecursiveBench msg func iterations minTime = recursiveBenchmark msg func iterations minTime 1
-        let runBenchmark bench msg func = bench msg func iterations minTime
-        
         let (<<) l r = results <- results @ [ r ]
         
-        printfn "Iterative Mark8 benchmark"
+        let runBenchmark bench msg func = bench msg func iterations minTime
+        let toString resultTuple =
+            let (name, mean, dev, count) = resultTuple
+            sprintf "%s,%.3f,%.3f,%i" name mean dev count
+        
+        printfn "Iterative Mark8 benchmark - mutate"        
+        results << runBenchmark iterativeBenchmark "ScaleVector2D" NoMutateBenchmarks.scaleVector2D
+        results << runBenchmark iterativeBenchmark "ScaleVector3D" NoMutateBenchmarks.scaleVector3D 
+        results << runBenchmark iterativeBenchmark "MultiplyVector2D" NoMutateBenchmarks.multiplyVector2D
+        results << runBenchmark iterativeBenchmark "MultiplyVector3D" NoMutateBenchmarks.multiplyVector3D
+        results << runBenchmark iterativeBenchmark "TranslateVector2D" NoMutateBenchmarks.translateVector2D  
+        results << runBenchmark iterativeBenchmark "TranslateVector3D" NoMutateBenchmarks.translateVector3D
+        results << runBenchmark iterativeBenchmark "SubtractVector2D" NoMutateBenchmarks.subtractVector2D
+        results << runBenchmark iterativeBenchmark "SubtractVector3D" NoMutateBenchmarks.subtractVector3D
+        results << runBenchmark iterativeBenchmark "LengthVector2D" NoMutateBenchmarks.lengthVector2D
+        results << runBenchmark iterativeBenchmark "LengthVector3D" NoMutateBenchmarks.lengthVector3D
+        results << runBenchmark iterativeBenchmark "DotProductVector2D" NoMutateBenchmarks.dotProductVector2D  
+        results << runBenchmark iterativeBenchmark "DotProductVector3D" NoMutateBenchmarks.dotProductVector3D
+        
+        File.WriteAllText("no-mutate-results.csv", "Test,Mean,Deviation,Count\n" + String.Join('\n', (List.map toString results)))
+        results <- []
+        
+        printfn "Iterative Mark8 benchmark - no mutate"
+        results << runBenchmark iterativeBenchmark "Sestoft Multyply" multiply
         results << runBenchmark iterativeBenchmark "Primes" (primes 100)
         results << runBenchmark iterativeBenchmark "ArrayRandomFill" (genRandomNumbers 4 4)
         results << runBenchmark iterativeBenchmark "GameOfLife" (iterateGameOfLifeTimes 6)
         results << runBenchmark iterativeBenchmark "FibonacciRec" (fibRecWrap 150)
         results << runBenchmark iterativeBenchmark "FibonacciIter" (fibIterWrap 150)
         
-        results << runBenchmark iterativeBenchmark "ScaleVector2D" scaleVector2D
-        results << runBenchmark iterativeBenchmark "ScaleVector3D" scaleVector3D 
-        results << runBenchmark iterativeBenchmark "MultiplyVector2D" multiplyVector2D
-        results << runBenchmark iterativeBenchmark "MultiplyVector3D" multiplyVector3D
-        results << runBenchmark iterativeBenchmark "TranslateVector2D" translateVector2D  
-        results << runBenchmark iterativeBenchmark "TranslateVector3D" translateVector3D
-        results << runBenchmark iterativeBenchmark "SubtractVector2D" subtractVector2D
-        results << runBenchmark iterativeBenchmark "SubtractVector3D" subtractVector3D
-        results << runBenchmark iterativeBenchmark "LengthVector2D" lengthVector2D
-        results << runBenchmark iterativeBenchmark "LengthVector3D" lengthVector3D
-        results << runBenchmark iterativeBenchmark "DotProductVector2D" dotProductVector2D  
-        results << runBenchmark iterativeBenchmark "DotProductVector3D" dotProductVector3D
+        results << runBenchmark iterativeBenchmark "ScaleVector2D" MutateBenchmarks.scaleVector2D
+        results << runBenchmark iterativeBenchmark "ScaleVector3D" MutateBenchmarks.scaleVector3D 
+        results << runBenchmark iterativeBenchmark "MultiplyVector2D" MutateBenchmarks.multiplyVector2D
+        results << runBenchmark iterativeBenchmark "MultiplyVector3D" MutateBenchmarks.multiplyVector3D
+        results << runBenchmark iterativeBenchmark "TranslateVector2D" MutateBenchmarks.translateVector2D  
+        results << runBenchmark iterativeBenchmark "TranslateVector3D" MutateBenchmarks.translateVector3D
+        results << runBenchmark iterativeBenchmark "SubtractVector2D" MutateBenchmarks.subtractVector2D
+        results << runBenchmark iterativeBenchmark "SubtractVector3D" MutateBenchmarks.subtractVector3D
+        results << runBenchmark iterativeBenchmark "LengthVector2D" MutateBenchmarks.lengthVector2D
+        results << runBenchmark iterativeBenchmark "LengthVector3D" MutateBenchmarks.lengthVector3D
+        results << runBenchmark iterativeBenchmark "DotProductVector2D" MutateBenchmarks.dotProductVector2D  
+        results << runBenchmark iterativeBenchmark "DotProductVector3D" MutateBenchmarks.dotProductVector3D
         
-//        printfn "\nRecursive Mark8 benchmark"
-//        results << runBenchmark startRecursiveBench "ScaleVector2D" scaleVector2D
-//        results << runBenchmark startRecursiveBench "ScaleVector3D" scaleVector3D
-//        results << runBenchmark startRecursiveBench "MultiplyVector2D" multiplyVector2D
-//        results << runBenchmark startRecursiveBench "MultiplyVector3D" multiplyVector3D
-//        results << runBenchmark startRecursiveBench "TranslateVector2D" translateVector2D
-//        results << runBenchmark startRecursiveBench "TranslateVector3D" translateVector3D
-//        results << runBenchmark startRecursiveBench "SubtractVector2D" subtractVector2D
-//        results << runBenchmark startRecursiveBench "SubtractVector3D" subtractVector3D
-//        results << runBenchmark startRecursiveBench "LengthVector2D" lengthVector2D
-//        results << runBenchmark startRecursiveBench "LengthVector3D" lengthVector3D
-//        results << runBenchmark startRecursiveBench "DotProductVector2D" dotProductVector2D
-//        results << runBenchmark startRecursiveBench "DotProductVector3D" dotProductVector3D
+        File.WriteAllText("mutate-results.csv", "Test,Mean,Deviation,Count\n" + String.Join('\n', (List.map toString results)))
         
-        let toString (resultTuple:(string * float * float * int)):string =
-            let (name, mean, dev, count) = resultTuple
-            sprintf "%s,%.3f,%.3f,%i" name mean dev count
-        
-        let resultString = "Test,Mean,Deviation,Count\n" + String.Join('\n', (List.map toString results))
-        File.WriteAllText("results.csv", resultString)
-        0 // return an integer exit code
+        0
