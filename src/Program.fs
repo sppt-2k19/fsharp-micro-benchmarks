@@ -58,9 +58,9 @@
         results <- []
         
         printfn "Iterative Mark8 benchmark - mutate"
-        results << runBenchmark iterativeBenchmark "Sestoft Multyply" multiply
+        results << runBenchmark iterativeBenchmark "Sestoft Multiply" multiply
         results << runBenchmark iterativeBenchmark "Primes" (primes 100)
-        results << runBenchmark iterativeBenchmark "ArrayRandomFill" (genRandomNumbers 4 4)
+        results << runBenchmark iterativeBenchmark "RandomizeArray" (randomizeArray 4 4)
         results << runBenchmark iterativeBenchmark "GameOfLife" (iterateGameOfLifeTimes 6)
         results << runBenchmark iterativeBenchmark "FibonacciRec" (fibRecWrap 150)
         results << runBenchmark iterativeBenchmark "FibonacciIter" (fibIterWrap 150)

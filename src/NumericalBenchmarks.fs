@@ -34,6 +34,6 @@ module NumericalBenchmarks
                     
         seq { for i in 2..max-1 do if array.Get(i) then yield i } |> Seq.last
         
-    let genRandomNumbers n m dummy =
+    let randomizeArray n m dummy =
         let rnd = System.Random()
         Array2D.init n m (fun _ _  -> rnd.Next())
