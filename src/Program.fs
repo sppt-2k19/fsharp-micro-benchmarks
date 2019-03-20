@@ -30,6 +30,10 @@
     
     [<EntryPoint>]
     let main argv =
+        
+        let p = 10
+        
+        
         let iterations = 5
         let minTime = float (250 * 1000000)
         let mutable results = []
