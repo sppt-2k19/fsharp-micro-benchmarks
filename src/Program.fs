@@ -66,8 +66,8 @@
         results << runBenchmark iterativeBenchmark "Sestoft Multiply" multiply
         results << runBenchmark iterativeBenchmark "Primes" (primes 100)
         results << runBenchmark iterativeBenchmark "RandomizeArray" (randomizeArray 4 4)
-        results << runBenchmark iterativeBenchmark "GameOfLife" (iterateGameOfLifeTimes 6)
-        results << runBenchmark iterativeBenchmark "InvasionPercolation" (invasionPercolation 8 30)
+        results << runBenchmark iterativeBenchmark "GameOfLife" (iterateGameOfLifeTimes 4)
+        results << runBenchmark iterativeBenchmark "InvasionPercolation" (invasionPercolation 5 10)
         results << runBenchmark iterativeBenchmark "FibonacciRecursive" (fibRecWrap 150)
         results << runBenchmark iterativeBenchmark "FibonacciIterative" (fibIterWrap 150)
         

@@ -60,5 +60,5 @@ let invasionPercolation n nfill dummy =
     
 let invPercoBenchmark n nfill dummy =
     let res = invasionPercolation n nfill dummy
-    float32 res.[0,*].Length //return *some* value so that the result isn't completely optimised away
+    float32 res.Length //return *some* value so that the result isn't completely optimised away
 
