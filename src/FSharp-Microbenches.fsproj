@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <Compile Include="GameOfLife.fs" />
+        <Compile Include="InvasionPercolation.fs" />
         <Compile Include="MutateBenchmarks.fs" />
         <Compile Include="NoMutateBenchmarks.fs" />
         <Compile Include="NumericalBenchmarks.fs" />
@@ -17,6 +18,10 @@
     <ItemGroup>
       <Content Include="Mutate-Results" />
       <Content Include="NoMutate-Results" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="C5" Version="2.5.3" />
     </ItemGroup>
 
 </Project>
