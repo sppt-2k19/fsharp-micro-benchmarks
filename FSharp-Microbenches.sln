@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp-Microbenches", "FSharp-Microbenches.fsproj", "{F02442BA-303F-4A06-B417-CF6945289E9E}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp-Microbenches", "src/FSharp-Microbenches.fsproj", "{F02442BA-303F-4A06-B417-CF6945289E9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
