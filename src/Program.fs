@@ -3,6 +3,7 @@
     open NumericalBenchmarks
     open GameOfLife
     open InvasionPercolation
+    open MapReduce
 
     open System
     let iterativeBenchmark msg func iterations minTime =
@@ -45,24 +46,12 @@
             let (name, mean, dev, count) = resultTuple
             sprintf "%s,%.3f,%.3f,%i" name mean dev count
         
-//        printfn "Iterative Mark8 benchmark - no mutate"        
-//        results << runBenchmark iterativeBenchmark "ScaleVector2D" NoMutateBenchmarks.scaleVector2D
-//        results << runBenchmark iterativeBenchmark "ScaleVector3D" NoMutateBenchmarks.scaleVector3D 
-//        results << runBenchmark iterativeBenchmark "MultiplyVector2D" NoMutateBenchmarks.multiplyVector2D
-//        results << runBenchmark iterativeBenchmark "MultiplyVector3D" NoMutateBenchmarks.multiplyVector3D
-//        results << runBenchmark iterativeBenchmark "TranslateVector2D" NoMutateBenchmarks.translateVector2D  
-//        results << runBenchmark iterativeBenchmark "TranslateVector3D" NoMutateBenchmarks.translateVector3D
-//        results << runBenchmark iterativeBenchmark "SubtractVector2D" NoMutateBenchmarks.subtractVector2D
-//        results << runBenchmark iterativeBenchmark "SubtractVector3D" NoMutateBenchmarks.subtractVector3D
-//        results << runBenchmark iterativeBenchmark "LengthVector2D" NoMutateBenchmarks.lengthVector2D
-//        results << runBenchmark iterativeBenchmark "LengthVector3D" NoMutateBenchmarks.lengthVector3D
-//        results << runBenchmark iterativeBenchmark "DotProductVector2D" NoMutateBenchmarks.dotProductVector2D  
-//        results << runBenchmark iterativeBenchmark "DotProductVector3D" NoMutateBenchmarks.dotProductVector3D
-//        
-//        File.WriteAllText("no-mutate-results.csv", "Test,Mean,Deviation,Count\n" + String.Join('\n', (List.map toString results)))
         results <- []
         
         printfn "Iterative Mark8 benchmark - mutate"
+        results << runBenchmark iterativeBenchmark "MapReduce Array" mapReduceArray
+        results << runBenchmark iterativeBenchmark "MapReduce Seq" mapReduceSeq
+        results << runBenchmark iterativeBenchmark "MapReduce Unions" mapReduceUnions
         results << runBenchmark iterativeBenchmark "Sestoft Multiply" multiply
         results << runBenchmark iterativeBenchmark "Primes" (primes 100)
         results << runBenchmark iterativeBenchmark "RandomizeArray" (randomizeArray 4 4)

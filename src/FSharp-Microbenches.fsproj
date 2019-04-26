@@ -12,6 +12,7 @@
         <Compile Include="MutateBenchmarks.fs" />
         <Compile Include="NoMutateBenchmarks.fs" />
         <Compile Include="NumericalBenchmarks.fs" />
+        <Compile Include="MapReduce.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
