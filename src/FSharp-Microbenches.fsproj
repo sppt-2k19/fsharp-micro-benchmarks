@@ -17,12 +17,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="Mutate-Results" />
-      <Content Include="NoMutate-Results" />
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="C5" Version="2.5.3" />
+      <PackageReference Include="sestoft-benchmark" Version="1.0.1" />
     </ItemGroup>
 
 </Project>

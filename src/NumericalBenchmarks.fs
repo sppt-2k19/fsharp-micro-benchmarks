@@ -32,8 +32,9 @@ module NumericalBenchmarks
                 for pm in p*2..p..max-1 do
                     array.Set(pm, false);
                     
-        seq { for i in 2..max-1 do if array.Get(i) then yield i } |> Seq.last
+        seq { for i in 2..max-1 do if array.Get(i) then yield i } |> Seq.last |> float32
         
     let randomizeArray n m dummy =
         let rnd = System.Random()
-        Array2D.init n m (fun _ _  -> rnd.Next())
+        let array = Array2D.init n m (fun _ _  -> rnd.Next())
+        float32 (dummy + array.[n - 1, m - 1])

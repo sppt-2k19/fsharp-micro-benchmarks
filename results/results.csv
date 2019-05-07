@@ -1,0 +1,23 @@
+Test,Mean,Deviation,Count
+MapReduce Array,876.337,5.842,524288
+MapReduce Seq,1100.945,2.207,262144
+MapReduce Unions,77.734,0.656,4194304
+Sestoft Multiply,10.917,0.014,33554432
+Primes,3680.991,12.023,131072
+RandomizeArray,2593.970,4.038,131072
+GameOfLife,24290.637,265.543,16384
+InvasionPercolation,17541.064,152.582,16384
+FibonacciRecursive,92.634,0.556,4194304
+FibonacciIterative,96.222,0.315,4194304
+ScaleVector2D,8.097,0.027,33554432
+ScaleVector3D,4.907,0.030,67108864
+MultiplyVector2D,6.525,0.057,67108864
+MultiplyVector3D,5.349,0.061,67108864
+TranslateVector2D,6.451,0.058,67108864
+TranslateVector3D,4.944,0.051,67108864
+SubtractVector2D,6.257,0.025,67108864
+SubtractVector3D,5.320,0.040,67108864
+LengthVector2D,5.089,0.046,67108864
+LengthVector3D,3.789,0.023,67108864
+DotProductVector2D,4.168,0.015,67108864
+DotProductVector3D,3.767,0.004,67108864

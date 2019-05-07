@@ -4,13 +4,13 @@ open System
     
 let numbers = [| "13.37"; "42.42"; "741.897"; "989.981"; "168.186" |]
 
-let mapReduceArray dummy =
-    let result = numbers |> Array.map Double.Parse |> Array.sum
-    result + float dummy
+let mapReduceArray (dummy:int) : float32 =
+    let result = numbers |> Array.map Single.Parse |> Array.sum
+    result + float32 dummy
     
-let mapReduceSeq dummy =
-    let result = numbers |> Seq.map Double.Parse |> Seq.sum
-    result + float dummy
+let mapReduceSeq (dummy:int) : float32 =
+    let result = numbers |> Seq.map Single.Parse |> Seq.sum
+    result + float32 dummy
     
     
 type Temperature = Celsius of float32 | Fahrenheit of float32 | Kelvin of float32

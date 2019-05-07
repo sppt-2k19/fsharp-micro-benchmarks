@@ -41,4 +41,4 @@ let iterateGrid (grid:string) =
 let iterateGameOfLifeTimes times x =
     let mutable grid = defaultGameOfLifeGrid
     for i in 0..times do grid <- iterateGrid grid
-    0.0f
+    float32 x + 0.0f

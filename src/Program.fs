@@ -4,6 +4,7 @@
     open GameOfLife
     open InvasionPercolation
     open MapReduce
+    open SestoftBenchmark
 
     open System
     let iterativeBenchmark msg func iterations minTime =
@@ -40,39 +41,39 @@
         let minTime = float (250 * 1000000)
         let mutable results = []
         let (<<) l r = results <- results @ [ r ]
-        
-        let runBenchmark bench msg func = bench msg func iterations minTime
+        let bbbb = Benchmark.Mark8
+        let runBenchmark msg func = Benchmark.Mark8 (msg, (new Func<int, float32>(func)), iterations, minTime)
         let toString resultTuple =
-            let (name, mean, dev, count) = resultTuple
+            let struct(name, mean, dev, count, dummy) = resultTuple
             sprintf "%s,%.3f,%.3f,%i" name mean dev count
         
         results <- []
         
         printfn "Iterative Mark8 benchmark - mutate"
-        results << runBenchmark iterativeBenchmark "MapReduce Array" mapReduceArray
-        results << runBenchmark iterativeBenchmark "MapReduce Seq" mapReduceSeq
-        results << runBenchmark iterativeBenchmark "MapReduce Unions" mapReduceUnions
-        results << runBenchmark iterativeBenchmark "Sestoft Multiply" multiply
-        results << runBenchmark iterativeBenchmark "Primes" (primes 100)
-        results << runBenchmark iterativeBenchmark "RandomizeArray" (randomizeArray 4 4)
-        results << runBenchmark iterativeBenchmark "GameOfLife" (iterateGameOfLifeTimes 4)
-        results << runBenchmark iterativeBenchmark "InvasionPercolation" (invasionPercolation 5 10)
-        results << runBenchmark iterativeBenchmark "FibonacciRecursive" (fibRecWrap 150)
-        results << runBenchmark iterativeBenchmark "FibonacciIterative" (fibIterWrap 150)
+        results << runBenchmark "MapReduce Array" mapReduceArray
+        results << runBenchmark "MapReduce Seq" mapReduceSeq
+        results << runBenchmark "MapReduce Unions" mapReduceUnions
+        results << runBenchmark "Sestoft Multiply" multiply
+        results << runBenchmark "Primes" (primes 100)
+        results << runBenchmark "RandomizeArray" (randomizeArray 4 4)
+        results << runBenchmark "GameOfLife" (iterateGameOfLifeTimes 4)
+        results << runBenchmark "InvasionPercolation" (invPercoBenchmark 5 10)
+        results << runBenchmark "FibonacciRecursive" (fibRecWrap 150)
+        results << runBenchmark "FibonacciIterative" (fibIterWrap 150)
         
-        results << runBenchmark iterativeBenchmark "ScaleVector2D" MutateBenchmarks.scaleVector2D
-        results << runBenchmark iterativeBenchmark "ScaleVector3D" MutateBenchmarks.scaleVector3D 
-        results << runBenchmark iterativeBenchmark "MultiplyVector2D" MutateBenchmarks.multiplyVector2D
-        results << runBenchmark iterativeBenchmark "MultiplyVector3D" MutateBenchmarks.multiplyVector3D
-        results << runBenchmark iterativeBenchmark "TranslateVector2D" MutateBenchmarks.translateVector2D  
-        results << runBenchmark iterativeBenchmark "TranslateVector3D" MutateBenchmarks.translateVector3D
-        results << runBenchmark iterativeBenchmark "SubtractVector2D" MutateBenchmarks.subtractVector2D
-        results << runBenchmark iterativeBenchmark "SubtractVector3D" MutateBenchmarks.subtractVector3D
-        results << runBenchmark iterativeBenchmark "LengthVector2D" MutateBenchmarks.lengthVector2D
-        results << runBenchmark iterativeBenchmark "LengthVector3D" MutateBenchmarks.lengthVector3D
-        results << runBenchmark iterativeBenchmark "DotProductVector2D" MutateBenchmarks.dotProductVector2D  
-        results << runBenchmark iterativeBenchmark "DotProductVector3D" MutateBenchmarks.dotProductVector3D
+        results << runBenchmark "ScaleVector2D" MutateBenchmarks.scaleVector2D
+        results << runBenchmark "ScaleVector3D" MutateBenchmarks.scaleVector3D 
+        results << runBenchmark "MultiplyVector2D" MutateBenchmarks.multiplyVector2D
+        results << runBenchmark "MultiplyVector3D" MutateBenchmarks.multiplyVector3D
+        results << runBenchmark "TranslateVector2D" MutateBenchmarks.translateVector2D  
+        results << runBenchmark "TranslateVector3D" MutateBenchmarks.translateVector3D
+        results << runBenchmark "SubtractVector2D" MutateBenchmarks.subtractVector2D
+        results << runBenchmark "SubtractVector3D" MutateBenchmarks.subtractVector3D
+        results << runBenchmark "LengthVector2D" MutateBenchmarks.lengthVector2D
+        results << runBenchmark "LengthVector3D" MutateBenchmarks.lengthVector3D
+        results << runBenchmark "DotProductVector2D" MutateBenchmarks.dotProductVector2D  
+        results << runBenchmark "DotProductVector3D" MutateBenchmarks.dotProductVector3D
         
-        File.WriteAllText("../results/mutate-results.csv", "Test,Mean,Deviation,Count\n" + String.Join('\n', (List.map toString results)))
+        File.WriteAllText("../results/results.csv", "Test,Mean,Deviation,Count\n" + String.Join('\n', (List.map toString results)))
         
         0
