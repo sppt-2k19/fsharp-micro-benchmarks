@@ -36,12 +36,16 @@
         
         let p = 10
         
+#if DEBUG
+        let mode = "debug"
+#else
+        let mode = "release"
+#endif
         
         let iterations = 5
         let minTime = float (250 * 1000000)
         let mutable results = []
         let (<<) l r = results <- results @ [ r ]
-        let bbbb = Benchmark.Mark8
         let runBenchmark msg func = Benchmark.Mark8 (msg, (new Func<int, float32>(func)), iterations, minTime)
         let toString resultTuple =
             let struct(name, mean, dev, count, dummy) = resultTuple
@@ -182,6 +186,7 @@
         results << runBenchmark "DotProductVector3D" MutateBenchmarks.dotProductVector3D
         results << runBenchmark "DotProductVector3D" MutateBenchmarks.dotProductVector3D
         
-        File.WriteAllText("../results/results.csv", "Test,Mean,Deviation,Count\n" + String.Join('\n', (List.map toString results)))
+        let path = sprintf "../results/results-%s.csv" mode
+        File.WriteAllText(path, "Test,Mean,Deviation,Count\n" + String.Join('\n', (List.map toString results)))
         
         0
